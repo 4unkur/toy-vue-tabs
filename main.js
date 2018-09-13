@@ -4,7 +4,7 @@ Vue.component('tabs', {
 	<div class="tabs">
 	  <ul>
 	  	<li v-for="tab in tabs" :class="{ 'is-active': tab.isActive }">
-	  		<a href="#" @click="selectTab(tab)">{{ tab.title }}</a>
+	  		<a :href="tab.href" @click="selectTab(tab)">{{ tab.title }}</a>
 		</li>
 	  </ul>
 	</div>
@@ -49,6 +49,11 @@ Vue.component('tab', {
 	},
 	mounted() {
 		this.isActive = this.selected
+	},
+	computed: {
+		href() {
+			return '#' + this.title.toLowerCase().replace(/ /g, '-')
+		}
 	}
 })
 
